@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Klever Kitchen</title>
+<title>Klever Küche</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -32,17 +32,24 @@ body{font-family:'DM Sans',sans-serif;color:var(--white)}
 
 .wrap{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px 48px}
 
-.av-outer{width:104px;height:104px;position:relative;margin-bottom:24px;animation:fadeUp .5s ease both}
-.av-ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--gold),#a06010,var(--gold2),#c8912a,var(--gold));animation:spin 6s linear infinite}
-.av-inner{position:absolute;inset:3px;border-radius:50%;background:#0d0d12;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:var(--gold);letter-spacing:-1px}
-.av-p{position:absolute;border-radius:50%;border:1px solid rgba(232,184,75,.6);opacity:0}
-.av-p1{inset:-8px;animation:pulse 2.4s ease-out infinite}
-.av-p2{inset:-8px;animation:pulse 2.4s ease-out infinite .85s}
-@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.7);opacity:0}}
-@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.logo-wrapper {
+  background: var(--white);
+  padding: 18px 25px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  animation: fadeUp .5s ease both;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(232,184,75,0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-/* Non-glitching, elegant gold for the name */
-.name{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(24px,6vw,34px);letter-spacing:-1px;text-align:center;color:#b08d57;animation:fadeUp .55s ease both;position:relative}
+.logo-img {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  display: block;
+}
 
 .tagline{font-size:12px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-top:8px;text-align:center;animation:fadeUp .65s ease both}
 
@@ -122,14 +129,11 @@ body{font-family:'DM Sans',sans-serif;color:var(--white)}
 <div id="glow"></div>
 
 <div class="wrap">
-  <div class="av-outer">
-    <div class="av-ring"></div>
-    <div class="av-inner">KK</div>
-    <div class="av-p av-p1"></div>
-    <div class="av-p av-p2"></div>
+  
+  <div class="logo-wrapper">
+    <img src="logoo.png" alt="Klever Küche Logo" class="logo-img">
   </div>
 
-  <h1 class="name">Klever Kitchen</h1>
   <p class="tagline">Ethiopian Kitchen Manufacturing · Addis Ababa</p>
 
   <div class="ticker-wrap">
@@ -167,7 +171,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--white)}
     </a>
   </div>
 
-  <p class="footer">© 2026 Klever Kitchen · Addis Ababa, Ethiopia</p>
+  <p class="footer">© 2026 Klever Küche · Addis Ababa, Ethiopia</p>
 </div>
 
 <script>
