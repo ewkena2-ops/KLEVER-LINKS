@@ -212,17 +212,5 @@ draw();
 /* CURSOR GLOW */
 const glow=document.getElementById('glow');
 addEventListener('mousemove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});
-
-/* 3D TILT */
-document.querySelectorAll('.btn').forEach(b=>{
-  b.addEventListener('mousemove',e=>{
-    const r=b.getBoundingClientRect();
-    const x=(e.clientX-r.left)/r.width-.5;
-    const y=(e.clientY-r.top)/r.height-.5;
-    b.style.transform=`perspective(600px) rotateX(${-y*9}deg) rotateY(${x*11}deg) translateY(-3px) scale(1.018)`;
-  });
-  b.addEventListener('mouseleave',()=>{b.style.transition='transform .45s ease';b.style.transform='perspective(600px) rotateX(0) rotateY(0) translateY(0) scale(1)'});
-  b.addEventListener('mouseenter',()=>{b.style.transition='transform .08s ease'});
-});
 </body>
 </html>
