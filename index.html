@@ -3,368 +3,226 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Klever Kitchen — Links</title>
+<title>Klever Kitchen</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#e8b84b;--gold2:#f5d07a;
+  --tt:#ff0050;--tg:#26a5e4;--yt:#ff0000;--ig:#e1306c;--ws:#e8b84b;
+  --white:#f5f5f0;--muted:rgba(245,245,240,0.4);
+  --surface:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.08);
+}
+html,body{background:#050508;min-height:100vh;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;color:var(--white)}
 
-  :root {
-    --bg: #0a0a0a;
-    --surface: #141414;
-    --border: rgba(255,255,255,0.07);
-    --gold: #e8b84b;
-    --gold-dim: rgba(232,184,75,0.15);
-    --white: #f5f5f0;
-    --muted: rgba(245,245,240,0.45);
-    --tiktok: #ff0050;
-    --telegram: #26a5e4;
-    --youtube: #ff0000;
-    --instagram: #e1306c;
-    --website: #e8b84b;
-  }
+#canvas{position:fixed;inset:0;pointer-events:none;z-index:0}
 
-  html, body {
-    background: var(--bg);
-    min-height: 100vh;
-    font-family: 'DM Sans', sans-serif;
-    color: var(--white);
-    overflow-x: hidden;
-  }
+.blobs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;filter:blur(80px)}
+.blob{position:absolute;border-radius:50%;opacity:.1;animation:blobMove 13s ease-in-out infinite alternate}
+.b1{width:500px;height:500px;background:var(--gold);top:-120px;left:-160px;animation-duration:14s}
+.b2{width:420px;height:420px;background:#c84b8e;bottom:-120px;right:-120px;animation-duration:11s;animation-delay:-5s}
+.b3{width:300px;height:300px;background:#4b7ec8;top:45%;left:55%;animation-duration:9s;animation-delay:-8s}
+@keyframes blobMove{0%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.1)}100%{transform:translate(-20px,30px) scale(.95)}}
 
-  /* Noise grain overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.35;
-  }
+#glow{position:fixed;width:320px;height:320px;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle,rgba(232,184,75,.06) 0%,transparent 70%);transform:translate(-50%,-50%);transition:left .08s linear,top .08s linear}
 
-  /* Ambient glow */
-  body::after {
-    content: '';
-    position: fixed;
-    top: -30%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(232,184,75,0.08) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
+.wrap{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px 48px}
 
-  .wrapper {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 48px 24px;
-  }
+.av-outer{width:104px;height:104px;position:relative;margin-bottom:24px;animation:fadeUp .5s ease both}
+.av-ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--gold),#a06010,var(--gold2),#c8912a,var(--gold));animation:spin 6s linear infinite}
+.av-inner{position:absolute;inset:3px;border-radius:50%;background:#0d0d12;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:var(--gold);letter-spacing:-1px}
+.av-p{position:absolute;border-radius:50%;border:1px solid rgba(232,184,75,.6);opacity:0}
+.av-p1{inset:-8px;animation:pulse 2.4s ease-out infinite}
+.av-p2{inset:-8px;animation:pulse 2.4s ease-out infinite .85s}
+@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.7);opacity:0}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
-  /* ── AVATAR ── */
-  .avatar-ring {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    padding: 2px;
-    background: conic-gradient(var(--gold), #c8912a, #f5d07a, var(--gold));
-    animation: spin 8s linear infinite;
-    margin-bottom: 20px;
-  }
+.name{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(24px,6vw,34px);letter-spacing:-1px;text-align:center;animation:fadeUp .55s ease both;position:relative}
+.glitch{position:relative;display:inline-block}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;inset:0;font-family:'Syne',sans-serif;font-weight:800}
+.glitch::before{color:var(--tt);clip-path:polygon(0 0,100% 0,100% 35%,0 35%);animation:gTop 5s infinite 2.5s}
+.glitch::after{color:var(--tg);clip-path:polygon(0 65%,100% 65%,100% 100%,0 100%);animation:gBot 5s infinite 2.5s}
+@keyframes gTop{0%,88%,100%{transform:translate(0)}90%{transform:translate(-3px,-1px)}93%{transform:translate(3px,1px)}96%{transform:translate(-2px,0)}}
+@keyframes gBot{0%,88%,100%{transform:translate(0)}90%{transform:translate(3px,1px)}93%{transform:translate(-3px,-1px)}96%{transform:translate(2px,0)}}
 
-  .avatar-inner {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: var(--surface);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 26px;
-    color: var(--gold);
-    letter-spacing: -1px;
-  }
+.tagline{font-size:12px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-top:8px;text-align:center;animation:fadeUp .65s ease both}
 
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
+.ticker-wrap{width:min(380px,88vw);overflow:hidden;margin:22px 0 30px;border-top:1px solid rgba(232,184,75,.2);border-bottom:1px solid rgba(232,184,75,.2);padding:7px 0;animation:fadeUp .7s ease both}
+.ticker{display:flex;white-space:nowrap;animation:tick 22s linear infinite;font-size:11px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase}
+.ticker span{margin-right:44px}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-  /* ── HEADER ── */
-  .name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(22px, 5vw, 30px);
-    letter-spacing: -0.5px;
-    text-align: center;
-    animation: fadeUp 0.6s ease both;
-  }
+.links{width:min(400px,90vw);display:flex;flex-direction:column;gap:11px}
 
-  .tagline {
-    font-size: 13px;
-    color: var(--muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-top: 6px;
-    text-align: center;
-    animation: fadeUp 0.7s ease both;
-  }
+.btn{
+  position:relative;display:flex;align-items:center;gap:15px;
+  width:100%;padding:15px 20px;border-radius:16px;
+  background:var(--surface);border:1px solid var(--border);
+  text-decoration:none;color:var(--white);
+  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;
+  cursor:pointer;overflow:hidden;
+  transition:transform .15s ease,border-color .2s,box-shadow .2s;
+  animation:fadeUp .75s ease both;
+}
+.btn:nth-child(1){animation-delay:.08s}
+.btn:nth-child(2){animation-delay:.15s}
+.btn:nth-child(3){animation-delay:.22s}
+.btn:nth-child(4){animation-delay:.29s}
+.btn:nth-child(5){animation-delay:.36s}
 
-  /* ── DIVIDER ── */
-  .divider {
-    width: 40px;
-    height: 1px;
-    background: var(--gold);
-    margin: 28px auto;
-    opacity: 0.5;
-    animation: fadeUp 0.75s ease both;
-  }
+.btn::before{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.055) 50%,transparent 62%);transform:translateX(-130%) skewX(-8deg);transition:transform .55s ease}
+.btn:hover::before{transform:translateX(130%) skewX(-8deg)}
 
-  /* ── BUTTONS ── */
-  .links {
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+.btn::after{content:'';position:absolute;bottom:0;left:12%;right:12%;height:2px;border-radius:2px;transform:scaleX(0);transition:transform .3s ease}
+.btn:hover::after{transform:scaleX(1)}
 
-  .btn {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    width: 100%;
-    padding: 16px 22px;
-    border-radius: 14px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    text-decoration: none;
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    overflow: hidden;
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    animation: fadeUp 0.8s ease both;
-  }
+.btn-tt:hover{border-color:rgba(255,0,80,.5);box-shadow:0 0 28px rgba(255,0,80,.14),0 10px 32px rgba(0,0,0,.4)}
+.btn-tt::after{background:var(--tt)}
+.btn-tg:hover{border-color:rgba(38,165,228,.5);box-shadow:0 0 28px rgba(38,165,228,.14),0 10px 32px rgba(0,0,0,.4)}
+.btn-tg::after{background:var(--tg)}
+.btn-yt:hover{border-color:rgba(255,0,0,.5);box-shadow:0 0 28px rgba(255,0,0,.14),0 10px 32px rgba(0,0,0,.4)}
+.btn-yt::after{background:var(--yt)}
+.btn-ig:hover{border-color:rgba(225,48,108,.5);box-shadow:0 0 28px rgba(225,48,108,.14),0 10px 32px rgba(0,0,0,.4)}
+.btn-ig::after{background:var(--ig)}
+.btn-ws:hover{border-color:rgba(232,184,75,.5);box-shadow:0 0 28px rgba(232,184,75,.18),0 10px 32px rgba(0,0,0,.4)}
+.btn-ws::after{background:var(--ws)}
 
-  .btn:nth-child(1) { animation-delay: 0.05s; }
-  .btn:nth-child(2) { animation-delay: 0.12s; }
-  .btn:nth-child(3) { animation-delay: 0.19s; }
-  .btn:nth-child(4) { animation-delay: 0.26s; }
-  .btn:nth-child(5) { animation-delay: 0.33s; }
+.ping{position:absolute;top:16px;right:18px;width:8px;height:8px;border-radius:50%;opacity:0;transition:opacity .2s}
+.btn:hover .ping{opacity:1}
+.ping::after{content:'';position:absolute;inset:0;border-radius:50%;animation:pingAnim 1.1s ease-out infinite;background:inherit}
+@keyframes pingAnim{0%{transform:scale(1);opacity:.9}100%{transform:scale(3);opacity:0}}
+.btn-tt .ping{background:var(--tt)}
+.btn-tg .ping{background:var(--tg)}
+.btn-yt .ping{background:var(--yt)}
+.btn-ig .ping{background:var(--ig)}
+.btn-ws .ping{background:var(--ws)}
 
-  /* Shimmer on hover */
-  .btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.04) 50%, transparent 60%);
-    transform: translateX(-100%);
-    transition: transform 0.4s ease;
-  }
+.ico{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s ease}
+.btn:hover .ico{transform:scale(1.12) rotate(-5deg)}
+.btn-tt .ico{background:rgba(255,0,80,.1)}
+.btn-tg .ico{background:rgba(38,165,228,.1)}
+.btn-yt .ico{background:rgba(255,0,0,.1)}
+.btn-ig .ico{background:rgba(225,48,108,.1)}
+.btn-ws .ico{background:rgba(232,184,75,.1)}
+.ico svg{width:22px;height:22px}
 
-  .btn:hover::before { transform: translateX(100%); }
+.lbl{flex:1}
+.lbl small{font-size:12px;color:var(--muted);font-weight:300;display:block;margin-top:1px}
 
-  /* Color flash line */
-  .btn::after {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    border-radius: 14px 0 0 14px;
-    transition: opacity 0.2s;
-    opacity: 0;
-  }
+.arr{font-size:18px;color:var(--muted);transition:transform .2s,color .2s}
+.btn:hover .arr{transform:translateX(5px);color:var(--white)}
 
-  .btn:hover { transform: translateY(-2px); }
+.stats{display:flex;gap:36px;margin-top:38px;animation:fadeUp .9s ease both;animation-delay:.48s}
+.stat{text-align:center}
+.stat-n{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;color:var(--gold);display:block}
+.stat-l{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
 
-  /* Per-platform colors */
-  .btn-tiktok:hover    { border-color: var(--tiktok);    box-shadow: 0 8px 30px rgba(255,0,80,0.18); }
-  .btn-tiktok::after   { background: var(--tiktok); }
-  .btn-tiktok:hover::after { opacity: 1; }
+.footer{margin-top:30px;font-size:11px;color:rgba(245,245,240,.18);letter-spacing:.08em;text-align:center;animation:fadeUp 1s ease both;animation-delay:.6s}
 
-  .btn-telegram:hover  { border-color: var(--telegram);  box-shadow: 0 8px 30px rgba(38,165,228,0.18); }
-  .btn-telegram::after { background: var(--telegram); }
-  .btn-telegram:hover::after { opacity: 1; }
-
-  .btn-youtube:hover   { border-color: var(--youtube);   box-shadow: 0 8px 30px rgba(255,0,0,0.18); }
-  .btn-youtube::after  { background: var(--youtube); }
-  .btn-youtube:hover::after { opacity: 1; }
-
-  .btn-instagram:hover { border-color: var(--instagram); box-shadow: 0 8px 30px rgba(225,48,108,0.18); }
-  .btn-instagram::after{ background: var(--instagram); }
-  .btn-instagram:hover::after { opacity: 1; }
-
-  .btn-website:hover   { border-color: var(--website);   box-shadow: 0 8px 30px rgba(232,184,75,0.22); }
-  .btn-website::after  { background: var(--website); }
-  .btn-website:hover::after { opacity: 1; }
-
-  /* Icon circle */
-  .icon-wrap {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: transform 0.2s ease;
-  }
-
-  .btn:hover .icon-wrap { transform: scale(1.1); }
-
-  .btn-tiktok    .icon-wrap { background: rgba(255,0,80,0.12); }
-  .btn-telegram  .icon-wrap { background: rgba(38,165,228,0.12); }
-  .btn-youtube   .icon-wrap { background: rgba(255,0,0,0.12); }
-  .btn-instagram .icon-wrap { background: rgba(225,48,108,0.12); }
-  .btn-website   .icon-wrap { background: rgba(232,184,75,0.12); }
-
-  .icon-wrap svg { width: 20px; height: 20px; }
-
-  .btn-label {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .btn-label span { font-size: 13px; color: var(--muted); font-weight: 400; }
-
-  .arrow {
-    color: var(--muted);
-    font-size: 16px;
-    transition: transform 0.2s ease, color 0.2s ease;
-  }
-
-  .btn:hover .arrow { transform: translateX(3px); color: var(--white); }
-
-  /* ── FOOTER ── */
-  .footer {
-    margin-top: 40px;
-    font-size: 11px;
-    color: rgba(245,245,240,0.2);
-    letter-spacing: 0.08em;
-    text-align: center;
-    animation: fadeUp 1s ease both;
-    animation-delay: 0.5s;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
-<div class="wrapper">
+<canvas id="canvas"></canvas>
+<div class="blobs"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div id="glow"></div>
 
-  <div class="avatar-ring">
-    <div class="avatar-inner">KK</div>
+<div class="wrap">
+  <div class="av-outer">
+    <div class="av-ring"></div>
+    <div class="av-inner">KK</div>
+    <div class="av-p av-p1"></div>
+    <div class="av-p av-p2"></div>
   </div>
 
-  <h1 class="name">Klever Kitchen</h1>
+  <h1 class="name"><span class="glitch" data-text="Klever Kitchen">Klever Kitchen</span></h1>
   <p class="tagline">Ethiopian Kitchen Manufacturing · Addis Ababa</p>
 
-  <div class="divider"></div>
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span>Premium Kitchens</span><span>✦</span><span>Addis Ababa</span><span>✦</span><span>Custom Design</span><span>✦</span><span>Quality Craftsmanship</span><span>✦</span>
+      <span>Premium Kitchens</span><span>✦</span><span>Addis Ababa</span><span>✦</span><span>Custom Design</span><span>✦</span><span>Quality Craftsmanship</span><span>✦</span>
+    </div>
+  </div>
 
   <div class="links">
-
-    <!-- TikTok -->
-    <a href="https://www.tiktok.com/@YOUR_HANDLE" target="_blank" rel="noopener" class="btn btn-tiktok">
-      <div class="icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.17 8.17 0 004.78 1.52V6.75a4.85 4.85 0 01-1-.06z" fill="#ff0050"/>
-        </svg>
-      </div>
-      <div class="btn-label">
-        TikTok
-        <span>Follow us on TikTok</span>
-      </div>
-      <span class="arrow">→</span>
+    <a href="https://www.tiktok.com/@YOUR_HANDLE" target="_blank" rel="noopener" class="btn btn-tt">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.17 8.17 0 004.78 1.52V6.75a4.85 4.85 0 01-1-.06z" fill="#ff0050"/></svg></div>
+      <div class="lbl">TikTok<small>Follow us</small></div>
+      <div class="ping"></div><span class="arr">→</span>
     </a>
-
-    <!-- Telegram -->
-    <a href="https://t.me/YOUR_CHANNEL" target="_blank" rel="noopener" class="btn btn-telegram">
-      <div class="icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.68 7.92c-.12.56-.45.7-.9.44l-2.52-1.86-1.22 1.17c-.13.13-.25.25-.5.25l.18-2.55 4.6-4.16c.2-.18-.04-.28-.31-.1L7.4 14.47l-2.46-.77c-.54-.17-.55-.54.11-.8l9.62-3.7c.45-.16.84.11.97.6z" fill="#26a5e4"/>
-        </svg>
-      </div>
-      <div class="btn-label">
-        Telegram
-        <span>Join our channel</span>
-      </div>
-      <span class="arrow">→</span>
+    <a href="https://t.me/YOUR_CHANNEL" target="_blank" rel="noopener" class="btn btn-tg">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8l-1.68 7.92c-.12.56-.45.7-.9.44l-2.52-1.86-1.22 1.17c-.13.13-.25.25-.5.25l.18-2.55 4.6-4.16c.2-.18-.04-.28-.31-.1L7.4 14.47l-2.46-.77c-.54-.17-.55-.54.11-.8l9.62-3.7c.45-.16.84.11.97.6z" fill="#26a5e4"/></svg></div>
+      <div class="lbl">Telegram<small>Join our channel</small></div>
+      <div class="ping"></div><span class="arr">→</span>
     </a>
-
-    <!-- YouTube -->
-    <a href="https://www.youtube.com/@YOUR_CHANNEL" target="_blank" rel="noopener" class="btn btn-youtube">
-      <div class="icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" fill="#ff0000"/>
-        </svg>
-      </div>
-      <div class="btn-label">
-        YouTube
-        <span>Watch our videos</span>
-      </div>
-      <span class="arrow">→</span>
+    <a href="https://www.youtube.com/@YOUR_CHANNEL" target="_blank" rel="noopener" class="btn btn-yt">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" fill="#ff0000"/></svg></div>
+      <div class="lbl">YouTube<small>Watch our videos</small></div>
+      <div class="ping"></div><span class="arr">→</span>
     </a>
-
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/YOUR_HANDLE" target="_blank" rel="noopener" class="btn btn-instagram">
-      <div class="icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#f09433"/>
-              <stop offset="25%" stop-color="#e6683c"/>
-              <stop offset="50%" stop-color="#dc2743"/>
-              <stop offset="75%" stop-color="#cc2366"/>
-              <stop offset="100%" stop-color="#bc1888"/>
-            </linearGradient>
-          </defs>
-          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="url(#ig)"/>
-        </svg>
-      </div>
-      <div class="btn-label">
-        Instagram
-        <span>See our latest work</span>
-      </div>
-      <span class="arrow">→</span>
+    <a href="https://www.instagram.com/YOUR_HANDLE" target="_blank" rel="noopener" class="btn btn-ig">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="50%" stop-color="#dc2743"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="url(#ig)"/></svg></div>
+      <div class="lbl">Instagram<small>See our latest work</small></div>
+      <div class="ping"></div><span class="arr">→</span>
     </a>
-
-    <!-- Website -->
-    <a href="https://YOUR_WEBSITE.com" target="_blank" rel="noopener" class="btn btn-website">
-      <div class="icon-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#e8b84b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="2" y1="12" x2="22" y2="12"/>
-          <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
-        </svg>
-      </div>
-      <div class="btn-label">
-        Our Website
-        <span>Visit kleverküche.com</span>
-      </div>
-      <span class="arrow">→</span>
+    <a href="https://YOUR_WEBSITE.com" target="_blank" rel="noopener" class="btn btn-ws">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#e8b84b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+      <div class="lbl">Our Website<small>kleverküche.com</small></div>
+      <div class="ping"></div><span class="arr">→</span>
     </a>
+  </div>
 
+  <div class="stats">
+    <div class="stat"><span class="stat-n" id="c1">0</span><span class="stat-l">Projects</span></div>
+    <div class="stat"><span class="stat-n" id="c2">0</span><span class="stat-l">Clients</span></div>
+    <div class="stat"><span class="stat-n" id="c3">0</span><span class="stat-l">Years</span></div>
   </div>
 
   <p class="footer">© 2026 Klever Kitchen · Addis Ababa, Ethiopia</p>
-
 </div>
+
+<script>
+/* PARTICLES */
+const cv=document.getElementById('canvas'),cx=cv.getContext('2d');
+let W,H,ps=[];
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+resize();addEventListener('resize',()=>{resize();init()});
+function mkP(){return{x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.4+.3,a:Math.random()}}
+function init(){ps=[];for(let i=0;i<85;i++)ps.push(mkP())}
+init();
+function draw(){
+  cx.clearRect(0,0,W,H);
+  ps.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>W)p.vx*=-1;
+    if(p.y<0||p.y>H)p.vy*=-1;
+    cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    cx.fillStyle=`rgba(232,184,75,${p.a*.38})`;cx.fill();
+  });
+  for(let i=0;i<ps.length;i++)for(let j=i+1;j<ps.length;j++){
+    const d=Math.hypot(ps[i].x-ps[j].x,ps[i].y-ps[j].y);
+    if(d<115){cx.beginPath();cx.moveTo(ps[i].x,ps[i].y);cx.lineTo(ps[j].x,ps[j].y);cx.strokeStyle=`rgba(232,184,75,${(1-d/115)*.07})`;cx.lineWidth=.5;cx.stroke()}
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+
+/* CURSOR GLOW */
+const glow=document.getElementById('glow');
+addEventListener('mousemove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});
+
+/* 3D TILT */
+document.querySelectorAll('.btn').forEach(b=>{
+  b.addEventListener('mousemove',e=>{
+    const r=b.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    b.style.transform=`perspective(600px) rotateX(${-y*9}deg) rotateY(${x*11}deg) translateY(-3px) scale(1.018)`;
+  });
+  b.addEventListener('mouseleave',()=>{b.style.transition='transform .45s ease';b.style.transform='perspective(600px) rotateX(0) rotateY(0) translateY(0) scale(1)'});
+  b.addEventListener('mouseenter',()=>{b.style.transition='transform .08s ease'});
+});
 </body>
 </html>
